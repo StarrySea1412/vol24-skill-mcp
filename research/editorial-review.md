@@ -68,4 +68,3 @@ research/mcp-observation.json 已实际观察协议2025-06-18、服务 ai-image-
 research/image-generation.json 保存真实jobId、模型、提交/完成时间、原始与最终图片路径；“真实生成记录”符合内容。research/technical-evidence.md 里的“没有执行生图/测试”说明该次源码取证行为，不是否定后续素材生成，读者可按文件日期与范围理解。
 
 讲解技能片段未安装；演示参考/脚本明确为短夹具；页面给出的本篇 research/visual-brief.md 与 verify/assets.py 文件均存在。未发现把示例、固定报文或概念插画冒称产品实测的链接说明。
-
