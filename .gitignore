@@ -1,6 +1,8 @@
 shots/
 .preview.pid
 verify/local-results.json
+verify/online-results.json
+verify/publication.json
 research/private-*
 research/.font-runtime/
 research/image-originals/

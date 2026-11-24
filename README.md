@@ -23,6 +23,7 @@
 node verify/site.cjs                 # 五枚互动、错误路径、键盘与移动端验收
 python verify/assets.py              # WebP 解码、尺寸、SVG、GIF与文件摘要
 node research/mcp-probe.mjs          # 零付费的本机握手和工具发现
+node verify/published.cjs            # 线上文件与已提交源码逐字节一致性
 ```
 
 页面验收需要 `playwright-core` 与本机 Edge，可通过 `NODE_PATH` 指定模块目录。用 `ARTICLE_URL=https://starrysea1412.github.io/vol24-skill-mcp/` 可按相同合同验线上页。PNG/WebP/GIF 检查需要 Pillow。
@@ -32,5 +33,7 @@ node research/mcp-probe.mjs          # 零付费的本机握手和工具发现
 字体使用 LXGW 文楷，OFL 许可证在 `assets/OFL.txt`。`verify/fonts.py` 从提供的正版 TTF 为本篇文字生成 WOFF2 子集，中文缺字检查结果在 `verify/fonts.json`。
 
 本地最终验收：141 项行为、资源、字体和布局检查通过，零 JS / 控制台错误、零资源失败；1440 / 390 / 320px 无整页横向溢出。截图保留在本机 `shots/`，脚本和结果随源码提供。
+
+线上以同一套脚本复跑，141 项同样通过。19 个页面、脚本、配图、字体与证据文件逐字节对照已提交源码，HTTP 均成功、diff=0；包括上一篇与系列目录的更新导航。
 
 上一篇：[VOL.23 别人家的造物：Linger](https://starrysea1412.github.io/vol23-linger/) · [全系列目录](https://starrysea1412.github.io/makers-notebook/)
