@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f7f4ec">
+<meta name="description" content="从 Linger 的 155 条命令接着问：Skill 与 MCP 各管哪一段？沿一张文章插图，走过技能加载、工具发现、参数校验、异步任务与交付验收。五段可重放互动。">
+<meta name="author" content="StarrySea1412">
+<meta property="og:title" content="把流程接上工具 · 造物手记 VOL.24">
+<meta property="og:description" content="Skill、MCP、CLI 三条路，通往同一个任务；接通、做完、交付，各自需要一份证据。">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://starrysea1412.github.io/vol24-skill-mcp/assets/01-paths.webp">
+<link rel="canonical" href="https://starrysea1412.github.io/vol24-skill-mcp/">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script defer src="demos.js"></script>
+<title>把流程接上工具 · 造物手记 VOL.24</title>
+</head>
+<body>
+<a class="skip-link" href="#contents">跳到目录</a>
+<header class="wrap masthead">
+  <a class="brand" href="https://starrysea1412.github.io/makers-notebook/">STARRYSEA · 造物手记</a>
+  <span class="edition">FIELD NOTES · VOL.24 · 2026.11</span>
+</header>
+<main>
+<div class="wrap">
+  <section class="hero" aria-labelledby="title">
+    <div>
+      <p class="eyebrow"><span>VOL.24</span><strong>Skill × MCP · 一件事的完整执行链</strong></p>
+      <p class="kicker">WORKFLOW &amp; INTERFACE / 流程与接口</p>
+      <h1 id="title">把流程<em>接上工具<svg class="scrib" viewBox="0 0 170 12" aria-hidden="true"><path d="M3 8 C30 3 58 11 88 6 S140 3 167 7" fill="none" stroke="#a95f16" stroke-width="3.6" stroke-linecap="round"/></svg></em></h1>
+      <div class="dek-wrap">
+        <p class="dek-tag">dek / 摘要</p>
+        <p class="dek">昨天，Linger 把 155 条命令收进一个 CLI。今天换一张工作台：给这篇文章生成一张插图。Skill 规定怎么做，MCP 说明怎么接；模型与宿主把两者用起来，最后还要有人打开那张图，判断它够不够交付。</p>
+      </div>
+      <div class="hero-meta">
+        <span class="pill"><b>5</b> 章 · <b>5</b> 段互动</span>
+        <span class="pill"><b>3</b> 条接入路线</span>
+        <span class="pill"><b>5</b> 张 GPT 章节插画</span>
+        <span class="pill">更新于 <b>2026.11.24</b></span>
+      </div>
+    </div>
+    <figure class="art hero-map">
+      <img src="assets/01-workflow.svg" width="560" height="610" alt="技能提供流程，模型与宿主组装调用；MCP客户端和服务端将参数交给画境，结果回到宿主，再由文件与画面验收决定能否交付。">
+      <figcaption><b>FIG. A</b> · 同一件事，跨过四种职责。<small>本篇机制图：Skill 是流程材料，MCP 是一条接入路径；CLI 或 HTTP 脚本也能到达同一个服务。</small></figcaption>
+    </figure>
+  </section>
+
+  <section class="opening" aria-labelledby="abstract-title">
+    <h2 id="abstract-title" class="abstract-label">本片提要</h2>
+    <p class="lead">装了技能，接了工具，为什么一次任务仍然可能做不完？</p>
+    <p>这篇的起点在<a href="https://starrysea1412.github.io/vol23-linger/">昨天的 Linger 手记</a>第六章。那台机器把许多连接器收进 <code>teamhub</code>，上期取证记下了 56 条自身命令与 99 条连接器命令。我最想接着问的是：如果命令行也能把事做完，Skill 和 MCP 的价值究竟落在哪儿？</p>
+    <p>刚好，我的画境生图项目同时留着两种入口：一个 Skill 附带的 <code>huajing.mjs</code> 脚本直接调本机 HTTP；一个 MCP 服务把同一套 HTTP 接口装成模型能发现的工具。把它们并排看，比单独解释两个名词更清楚。</p>
+    <p>本篇沿同一张图走五站：选路线、读流程、查工具、等任务、验文件。<a href="https://starrysea1412.github.io/agent-skillcraft/">VOL.07</a> 已经拆过技能包，<a href="https://starrysea1412.github.io/agent-toolkit/">VOL.15</a> 已经拆过工具接入；这次把两端接成一次可以交付的工作。</p>
+    <p class="scope">标本：本机 <code>ai-image-studio</code> 的 <code>src/mcp-server.js</code>、<code>src/server.js</code> 与 <code>clawhub-skill/huajing-image-gen/</code>，核对于 2026-11-24。报文互动固定采用 MCP 2025-06-18 口径；画境任务状态与等待限额另由本服务定义。五张插画经 GPT 渠道生成；互动内的任务和故障为确定性模型，PNG 文件检查实际在浏览器执行。</p>
+    <figure class="decoration"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/01-paths.webp"><img src="assets/loop.gif" width="384" height="256" alt="纸面工作台插画的轻微推镜循环。" loading="lazy"></picture><figcaption>动图 · 本篇 GPT 插画合成的 12 帧轻推镜，是装饰循环；不表示真实任务状态。</figcaption></figure>
+    <nav class="toc" id="contents" aria-label="文章目录">
+      <a href="#ch1"><b>01</b><span>同一张图，三种入口</span><small>流程与接入各有价值</small></a>
+      <a href="#ch2"><b>02</b><span>技能先被找到，再被读到</span><small>从描述到正文，再到按需材料</small></a>
+      <a href="#ch3"><b>03</b><span>工具先报家门，再接受调用</span><small>握手、清单与参数契约</small></a>
+      <a href="#ch4"><b>04</b><span>沿同一个编号等一张图</span><small>超时之后继续查已有任务</small></a>
+      <a href="#ch5"><b>05</b><span>打开文件，才谈交付</span><small>把故障定位到责任边界</small></a>
+      <a href="#quickcard"><b>↳</b><span>如果只带走五句</span><small>一张工作台速查卡</small></a>
+    </nav>
+  </section>
+</div>
+
+<div class="wrap">
+<section class="chapter" id="ch1" aria-labelledby="ch1-title">
+  <div class="chapter-head">
+    <div class="chapter-no" aria-hidden="true">01</div>
+    <div><p class="chapter-label">THREE ROUTES / 三种入口</p><h2 id="ch1-title">同一张图，三种入口</h2><p>目标只有一个：生成一张适合文章的横向插图。路线可以不同，交付标准仍然得有人说清楚。</p></div>
+  </div>
+  <div class="reading">
+    <figure class="illustration"><img src="assets/01-paths.webp" width="1536" height="1024" alt="纸面绘图工作台旁，命令键盘、规程笔记和模块接口通过三条独立路径抵达同一件作品。" loading="lazy"><figcaption><b>FIG. B</b> · 三条入口，指向同一件作品。GPT 概念插画，非软件截图。</figcaption></figure>
+    <h3>01.1 · 先把三种东西摆开</h3>
+    <p><strong>Skill 是一个装有做法的目录。</strong><code>SKILL.md</code> 写触发描述、步骤与注意事项，旁边可以放脚本、参考文件、模板和素材。它把“这类事通常怎么做”从临时聊天里提出来，变成下次还能找到的材料。</p>
+    <p><strong>MCP 是宿主与服务交换能力和上下文的协议。</strong>宿主里的客户端询问服务有哪些工具、每个工具接受什么参数，然后发出调用。MCP 也有资源与提示模板等能力；本文只走画境实际提供的工具这条线。</p>
+    <p><strong>CLI 是另一种调用入口。</strong>在终端里运行程序，把参数交给它，读取标准输出和退出码。它可以由人调用，也可以由 Agent 调用。Linger 的选择说明：把工具整理成一套清楚的命令行，同样是认真做接入的办法。</p>
+    <div class="table-wrap"><table><caption>同一份画境服务，三条可成立的路线</caption><thead><tr><th>路线</th><th>做法从哪来</th><th>怎么接到服务</th><th>需要维护什么</th></tr></thead><tbody><tr><td>普通提示 + CLI</td><td>当前请求与命令帮助</td><td>运行命令，脚本调 HTTP</td><td>提示、命令契约与运行环境</td></tr><tr><td>Skill + HTTP 脚本</td><td>技能正文与参考材料</td><td>附带脚本直接调 HTTP</td><td>规程、脚本与业务接口</td></tr><tr><td>Skill + MCP</td><td>技能正文与参考材料</td><td>宿主客户端调用 MCP 工具</td><td>规程、服务端与工具 schema</td></tr></tbody></table></div>
+    <p>现成的画境 Skill 脚本只有 239 行，使用 Node 内置 <code>fetch</code>，直接请求 <code>/api/generations</code>。MCP 服务则是 stdio 薄代理，再把请求交给同一个 HTTP 服务。这是两条真实存在的路径；Skill 并没有等待 MCP 才获得执行能力。</p>
+    <aside class="ask"><h3>经典追问：既然都能生成图片，为什么还要封装 Skill？</h3><p>因为接口解决“能不能调用”，规程解决“这次该怎样调用”。同一个生图接口接受很多提示词，却不知道这篇文章是技术说明、插画要沿用昨天的配色、图中不能生成乱码文字、返回后还要压成 WebP。把这些反复出现的要求放进技能，才能减少每次重新交代的工作。流程很短、只做一次时，当前提示与命令帮助也可能已经够用。</p></aside>
+    <div class="demo" id="demo1">
+      <div class="demo-head"><b>互动 01</b><strong>同一任务三条路</strong><span>选路线，再逐步推进</span></div>
+      <div class="controls"><button type="button" data-action="route" data-value="cli">普通提示 + CLI</button><button type="button" data-action="route" data-value="http">Skill + HTTP 脚本</button><button type="button" data-action="route" data-value="mcp">Skill + MCP</button></div>
+      <dl class="readout"><div><dt>路线</dt><dd data-view="route"></dd></div><div><dt>进度</dt><dd data-view="step"></dd></div><div><dt>本步负责者</dt><dd data-view="owner"></dd></div><div><dt>结果</dt><dd data-view="result"></dd></div></dl>
+      <pre data-view="log" tabindex="0" aria-label="路线执行记录"></pre>
+      <div class="controls"><button type="button" data-action="next">下一步</button><button type="button" data-action="reset">重来</button></div>
+      <p data-status role="status" aria-live="polite"></p><p class="demo-foot">确定性推演：三条固定六步路线，均可完成；不运行真实命令。看最后一步——每条路都需要交付验收。切换路线从第零步开始，重来可复放。</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch2" aria-labelledby="ch2-title">
+  <div class="chapter-head"><div class="chapter-no" aria-hidden="true">02</div><div><p class="chapter-label">PROGRESSIVE LOADING / 按需读取</p><h2 id="ch2-title">技能先被找到，再被读到</h2><p>磁盘上有一个技能目录，和这轮任务实际读过它的正文，是两份不同的证据。</p></div></div>
+  <div class="reading">
+    <figure class="illustration"><img src="assets/02-progressive.webp" width="1536" height="1024" alt="一张小索引卡引向半开的规程笔记，随后只取出一份需要的参考资料，其余文件仍在架子上。" loading="lazy"><figcaption><b>FIG. C</b> · 先看索引，相关时再展开正文，材料按需取用。GPT 概念插画。</figcaption></figure>
+    <h3>02.1 · 描述是发现入口</h3>
+    <p>Agent Skills 规范把加载分成三段：发现阶段读取 <code>name</code> 与 <code>description</code>；相关时激活，读取整份 <code>SKILL.md</code>；执行时再按需取脚本、参考与素材。规范建议正文控制在 500 行以内。这是写作者控制上下文成本的建议，并不保证所有宿主都用同一种触发机制。</p>
+    <p>画境技能的真实描述写得很具体：生成图片、润色提示词、查找旧图，并交代本机服务与 Node 的前提。它给模型的是判断相关性的材料。技能目录被安装后，如果本轮只看到一个模糊名字，或者正文根本没有进入上下文，就不能期待规程自动生效。</p>
+    <pre class="codeblock"><code>---
+name: article-illustration
+description: 为互动技术文章生成和检查章节配图；用于确定用途、
+  延续系列画风、选择画境渠道、查询任务并保存已验收的图片。
+---
+
+## 流程
+1. 先读本篇分镜与上一期的配图。
+2. 指定已核对的 GPT 渠道、比例与张数。
+3. 提交后保存编号，等待时查询已有任务。
+4. 打开图片，核验格式、尺寸、构图与文字。
+5. 放进文章 assets，检查页面引用与移动端显示。
+
+## 按需材料
+- research/visual-brief.md：本篇五张图的分镜
+- verify/assets.py：格式、尺寸与文件摘要检查</code></pre>
+    <p class="specimen-caption">上面是本篇讲解用的技能片段，未安装到用户技能目录。画境原有技能与脚本另有真实路径。把引用文件列出来，是让执行者知道去哪儿取材料；列出来本身不会让脚本自动运行。</p>
+    <h3>02.2 · 流程规则也有执行者</h3>
+    <p>“必须检查成图”可以写进技能，但硬性验收仍应由实际程序和页面检查承担。模型可能漏读一条要求，工具可能返回一个只含路径的结果，页面也可能引用错文件。把检查写成可运行的步骤，比只在正文里写一句“注意质量”更有用。</p>
+    <aside class="ask"><h3>经典追问：为什么不把所有 Skill 全塞进开场提示？</h3><p>因为很多材料与当前任务无关。每个技能都附几百行规程和参考时，全量加载会让每轮请求背着大量用不到的内容，还会让相似规则互相争抢注意力。先用简短描述找相关技能，再读它的正文，最后按需读取细节，成本才随这次任务实际用到的材料增长。需要稳定执行的关键步骤，还要留下可检查的输出。</p></aside>
+    <div class="demo" id="demo2">
+      <div class="demo-head"><b>互动 02</b><strong>渐进加载台</strong><span>看读取与执行各发生在哪一步</span></div>
+      <div class="controls"><button type="button" data-action="discover">发现技能</button><button type="button" data-action="load-body">读取正文</button><button type="button" data-action="load-reference">读取一份参考</button><button type="button" data-action="run-script">执行检查脚本</button><button type="button" data-action="reset">重来</button></div>
+      <dl class="readout"><div><dt>当前层</dt><dd data-view="layer"></dd></div><div><dt>已读字符</dt><dd data-view="chars"></dd></div><div><dt>参考材料</dt><dd data-view="references"></dd></div><div><dt>脚本执行</dt><dd data-view="executed"></dd></div></dl>
+      <pre data-view="log" tabindex="0" aria-label="技能读取记录"></pre><p data-status role="status" aria-live="polite"></p><p class="demo-foot">确定性模型：内置三份短文档，字符数实际计算，含换行；不换算 token，也不预测真实模型触发概率。重复读同一份参考不会重复计入。读正文后脚本仍未执行，重来清空全部状态。</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch3" aria-labelledby="ch3-title">
+  <div class="chapter-head"><div class="chapter-no" aria-hidden="true">03</div><div><p class="chapter-label">DISCOVERY &amp; CONTRACT / 工具契约</p><h2 id="ch3-title">工具先报家门，再接受调用</h2><p>模型需要清楚的名字与参数；宿主需要可连接的服务；服务需要一份能够拒绝错误输入的契约。</p></div></div>
+  <div class="reading">
+    <figure class="illustration"><img src="assets/03-contract.webp" width="1536" height="1024" alt="模块插头与三格接口对齐，过大的错误插头留在一旁，说明声明的接口与参数必须匹配。" loading="lazy"><figcaption><b>FIG. D</b> · 接口告诉调用者，哪些形状可以被接住。GPT 概念插画。</figcaption></figure>
+    <h3>03.1 · 先握手，再列清单</h3>
+    <p>按本篇固定采用的 MCP 2025-06-18 生命周期，客户端先发 <code>initialize</code>，交换协议版本与能力；服务器响应后，客户端发 <code>notifications/initialized</code>。通知没有请求编号，不期待响应。准备好以后，再用 <code>tools/list</code> 找到可用工具。</p>
+    <p>版本协商也有边界：服务器支持请求版本时回同版；否则回它支持的版本。客户端若不支持这个返回版本，应断开。接上一个进程，并不等于双方已经能用同一套规则交谈。</p>
+    <p class="note">本篇在本机实际跑过一次 initialize → initialized 通知 → tools/list：协商版本为 2025-06-18，服务标识 <code>ai-image-studio / 0.1.0</code>，清单包含 13 个工具。这里只发现工具，未调用生图；生成图片的真实 API 记录另放在文末。</p>
+    <figure class="diagram"><img src="assets/02-handshake.svg" width="680" height="440" alt="MCP客户端向服务端发initialize，接收版本与能力响应，发不带id的initialized通知，然后tools/list发现工具，最后tools/call提交参数。" loading="lazy"><figcaption><b>FIG. E</b> · 先建立会话，再发现工具，再调用。只展开本文需要的 stdio 路径；不把本地 HTTP 当成 MCP 传输。</figcaption></figure>
+    <h3>03.2 · 把当前 schema 当事实源</h3>
+    <p>画境这里有两个需要记住的名字：<code>generate_image</code> 和 <code>get_generation</code>。查询接受 <code>{id:string}</code>。猜成 <code>get_job</code>，或者把 <code>id</code> 写成另一个参数名，流程叙述再正确也调用不到对应工具。</p>
+    <div class="table-wrap"><table><caption>从本机源码读取的 generate_image 输入限制</caption><thead><tr><th>字段</th><th>此版本画境的合同</th><th>在哪检查</th></tr></thead><tbody><tr><td><code>prompt</code></td><td>必填字符串，1–12,000 字符</td><td>MCP 工具 schema</td></tr><tr><td><code>count</code></td><td>整数 1–4；省略时后端取 1</td><td>MCP 工具 schema</td></tr><tr><td><code>wait</code></td><td>默认 true；false 时先返回任务编号</td><td>MCP 工具逻辑</td></tr><tr><td><code>waitSeconds</code></td><td>5–600 秒，默认 240 秒</td><td>MCP 工具 schema 与等待逻辑</td></tr><tr><td><code>size</code></td><td><code>auto</code> 或宽高 256–2048、均为 64 倍数，总像素 ≤ 3,145,728</td><td>本机 HTTP 业务服务；MCP schema 只声明 string</td></tr></tbody></table></div>
+    <p>这些数来自画境当前实现，不能搬成 MCP 或所有 GPT 图像模型的通用限制。<code>1536x1024</code> 在这里合法，<code>1619x972</code> 则过不了本机服务的倍数检查。规则变了，应更新工具与脚本共同依赖的事实源。</p>
+    <aside class="ask"><h3>经典追问：已经有参数 schema，为什么还会调错？</h3><p>schema 把可用字段和类型告诉调用者，不能替模型选对业务目的，也不能证明渠道在线。调用者可能看的是旧清单，可能把正文里的别名当成工具名，也可能提交一份类型合法却不适合文章的提示词。先校验名字与参数，再处理执行结果，最后验收作品，三段检查各负责一类错误。</p></aside>
+    <div class="demo" id="demo3">
+      <div class="demo-head"><b>互动 03</b><strong>报文与参数台</strong><span>先走完握手，再尝试四类调用</span></div>
+      <div class="controls"><button type="button" data-action="next">握手下一步</button><button type="button" data-action="reset">重来</button></div>
+      <div class="controls"><button type="button" data-action="case" data-value="valid">合法参数</button><button type="button" data-action="case" data-value="schema-error">空 prompt + count=5</button><button type="button" data-action="case" data-value="rpc-error">错误协议方法</button><button type="button" data-action="case" data-value="tool-error">工具执行失败</button><button type="button" data-action="call">发起调用</button></div>
+      <dl class="readout three"><div><dt>会话阶段</dt><dd data-view="phase"></dd></div><div><dt>错误归属</dt><dd data-view="error-kind"></dd></div><div><dt>发出调用</dt><dd data-view="calls"></dd></div></dl>
+      <pre data-view="log" tabindex="0" aria-label="MCP协议报文"></pre><p data-status role="status" aria-live="polite"></p><p class="demo-foot">确定性报文夹具：按 2025-06-18 口径走 initialize → initialized 通知 → tools/list；schema 只节选三个真实字段。本小样宿主会在发请求前拦错误参数，并非所有宿主都如此。协议 error 与工具 result.isError 分开展示，重来复位。</p>
+    </div>
+    <p class="note">这篇的图片实际走用户指定的画境 HTTP API 渠道；报文台用于解释同一服务的 MCP 入口。两条路径交到同一个业务服务，不把它们写成同一种传输。</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch4" aria-labelledby="ch4-title">
+  <div class="chapter-head"><div class="chapter-no" aria-hidden="true">04</div><div><p class="chapter-label">ONE TASK ID / 同一个编号</p><h2 id="ch4-title">沿同一个编号等一张图</h2><p>等待超时，是观察者的一次结果。任务是否完成，要向保存它状态的服务查询。</p></div></div>
+  <div class="reading">
+    <figure class="illustration"><img src="assets/04-ticket.webp" width="1536" height="1024" alt="一张任务票依次经过受理盘、运行中的绘图台和晾图架；前景的计时器停了，后方机器仍在工作。" loading="lazy"><figcaption><b>FIG. F</b> · 计时器停下，不会替工作台宣布失败。GPT 概念插画。</figcaption></figure>
+    <h3>04.1 · 受理、终态与交付，分三次回答</h3>
+    <p>画境把一次生图提交持久化为 <code>queued</code> 后，HTTP 返回 202。worker 接走它，状态进入 <code>running</code>；图片保存成功以后写 <code>completed</code>；执行失败则写 <code>failed</code>，另有 <code>cancelled</code> 终态。MCP 的 <code>wait:false</code> 会先返回这些任务的编号，提示调用者用 <code>get_generation</code> 查询。</p>
+    <pre class="codeblock"><code>// 依照源码节选的讲解示例，编号不是本次真实任务
+generate_image({
+  prompt: "纸面工作台，蓝墨线与赭色标记，无文字",
+  providerId: "已核对的-GPT-渠道-ID",
+  size: "1536x1024",
+  count: 1,
+  wait: false
+})
+
+// 工具结果的 content[0].text 解析后，节选：
+{"submitted":["gen-demo-001"],
+ "generations":[{"id":"gen-demo-001","status":"queued"}],
+ "hint":"用 get_generation 查询进度"}
+
+get_generation({id:"gen-demo-001"})
+// 返回 {generation:{id,status,images:[{file,url,mime}],...}}</code></pre>
+    <p>这里的 <code>queued</code>、任务编号、图片路径与 <code>get_generation</code> 都属于画境的业务合同。MCP 提供工具调用的外壳，没有替每个服务统一命名它的生图状态。</p>
+    <h3>04.2 · 别让一次等待变成第二次提交</h3>
+    <p>这个 MCP 包装器默认等 240 秒，最多 600 秒。预算到期会返回 <code>timedOut</code> 并提示“仍在生成中，稍后用 get_generation 查询”。这句话应改变下一步动作：保存已有编号，查询原任务。重新调用生成接口，创建的是另一件工作，既可能多付费用，也可能得到第二张不同的图。</p>
+    <p>原有 CLI 也有自己的等待预算，默认 300 秒。终端退出码描述脚本这次如何结束，不能单凭超时就断言上游没有产生结果。结果不确定时，先找已知任务和回执，再决定是否需要另一次生成。</p>
+    <aside class="ask"><h3>经典追问：本次等待已经超时，为什么还要保留那个编号？</h3><p>因为编号把一次发起动作和一份持久化状态连起来。客户端不再等待，并不会自动抹掉服务里的任务。没有编号，下一步只能猜；有编号，就能区分仍在运行、已完成、明确失败和已取消。查清现有任务以后，才有条件决定重试。这与 VOL.19 的丢回执实验是同一个问题，换到了生图工作台。</p></aside>
+    <div class="demo" id="demo4">
+      <div class="demo-head"><b>互动 04</b><strong>原编号查询台</strong><span>让客户端先超时，再看服务端完成</span></div>
+      <div class="controls"><button type="button" data-action="submit">提交一张图</button><button type="button" data-action="advance">服务推进一步</button><button type="button" data-action="timeout">客户端等待超时</button><button type="button" data-action="query">查询原编号</button><button type="button" data-action="fail">服务明确失败</button><button type="button" data-action="cancel">服务取消任务</button><button type="button" data-action="reset">重来</button></div>
+      <dl class="readout"><div><dt>任务编号</dt><dd data-view="job-id"></dd></div><div><dt>服务端状态</dt><dd data-view="server-state"></dd></div><div><dt>客户端状态</dt><dd data-view="client-state"></dd></div><div><dt>提交 / 查询</dt><dd><span data-view="submissions"></span> / <span data-view="queries"></span></dd></div></dl>
+      <pre data-view="log" tabindex="0" aria-label="异步任务状态记录"></pre><p data-status role="status" aria-live="polite"></p><p class="demo-foot">确定性任务模型：按钮手动推进，无外部计时或真实生图。依次提交、推进、超时、再推进、查询；服务完成时客户端仍可能停在超时观察上。每次查询保留同一编号与提交数，重来清空任务。</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch5" aria-labelledby="ch5-title">
+  <div class="chapter-head"><div class="chapter-no" aria-hidden="true">05</div><div><p class="chapter-label">EVIDENCE &amp; DELIVERY / 交付证据</p><h2 id="ch5-title">打开文件，才谈交付</h2><p>工具返回 completed，说明这份服务合同走到了终态。图片是否适合文章，还要检查真正的文件和画面。</p></div></div>
+  <div class="reading">
+    <figure class="illustration"><img src="assets/05-inspect.webp" width="1536" height="1024" alt="完成的植物插画放在检图台上，旁边的尺子与放大镜检查尺寸和构图，空信封留在一边。" loading="lazy"><figcaption><b>FIG. G</b> · 打开作品，再决定它能否进入文章。GPT 概念插画。</figcaption></figure>
+    <h3>05.1 · 文件名是一种声明，解码才是证据</h3>
+    <p>一个叫 <code>illustration.png</code> 的文件，里面可能是错误页面。先读取文件签名，再交给图像解码器检查格式和尺寸，才能知道它是不是一张可用图片。本篇交互把这一步实际放在浏览器里执行：读取 PNG 的 8 字节签名与 IHDR，随后解码本地生成的 PNG，再核对宽高。</p>
+    <p>文件合法还不够。需要看的东西是否在画面里？图中文字是否准确？五张图是否像同一篇文章？网页引用的是最后采用的版本吗？390px 宽的手机上，主体有没有被裁掉？这些问题不会因为一次工具调用返回成功而自行消失。</p>
+    <div class="table-wrap"><table><caption>从现象定位到下一份该查的证据</caption><thead><tr><th>现象</th><th>先查什么</th><th>对应责任</th></tr></thead><tbody><tr><td>装了 Skill，却没按规程做</td><td>本轮是否实际读了正文，描述是否匹配任务</td><td>技能发现、宿主加载与执行流程</td></tr><tr><td>找不到工具 / 调用旧名</td><td>当前 tools/list 和宿主暴露的工具清单</td><td>工具注册、暴露与名称匹配</td></tr><tr><td>参数被拒绝</td><td>当前 schema 与业务校验返回</td><td>参数组装与接口契约</td></tr><tr><td>服务已连接，但生图失败</td><td>任务错误、渠道配置与上游响应</td><td>画境业务服务与模型渠道</td></tr><tr><td>有文件，却打不开或比例不符</td><td>文件签名、实际尺寸与解码结果</td><td>素材验收与页面集成</td></tr></tbody></table></div>
+    <aside class="ask"><h3>经典追问：让模型自己判断成功，省掉检查不行吗？</h3><p>模型可以判断画面是否表达了正文，但文件是否可解码、尺寸是否符合合同、链接是否返回图片，程序检查更直接。把可计算的部分交给检查器，再把构图、语义与风格交给目检，才会留下能复核的证据。若连图片都没打开，模型说“已完成”只是在复述接口状态。</p></aside>
+    <div class="demo" id="demo5">
+      <div class="demo-head"><b>互动 05</b><strong>故障定位与文件验收</strong><span>挑一个结果，实际执行文件检查</span></div>
+      <div class="controls"><button type="button" data-action="case" data-value="skill-missing">技能未加载</button><button type="button" data-action="case" data-value="tool-hidden">工具未暴露</button><button type="button" data-action="case" data-value="bad-arguments">参数错误</button><button type="button" data-action="case" data-value="service-failed">服务失败</button><button type="button" data-action="case" data-value="bad-file">假 PNG</button><button type="button" data-action="case" data-value="wrong-size">横图变竖图</button><button type="button" data-action="case" data-value="ok">合法横图</button></div>
+      <dl class="readout"><div><dt>故障位置</dt><dd data-view="location"></dd></div><div><dt>文件格式</dt><dd data-view="format"></dd></div><div><dt>实际尺寸</dt><dd data-view="dimensions"></dd></div><div><dt>文件验收</dt><dd data-view="accepted"></dd></div></dl>
+      <pre data-view="log" tabindex="0" aria-label="文件验收记录"></pre>
+      <div class="controls"><button type="button" data-action="inspect">定位并检查</button><button type="button" data-action="reset">重来</button></div><p data-status role="status" aria-live="polite"></p><p class="demo-foot">前四种故障为固定夹具；文件三场景实际检查签名、IHDR 与浏览器解码。PNG 为本地生成的色块，非模型作品。1536 × 1024 是本小样的固定合同；通过只表示文件检查通过，画面仍需目检。重来使未完成的旧检查失效。</p>
+    </div>
+    <h3>05.2 · 这一篇怎样算做完</h3>
+    <p>正文里的报文与表格对到当前源码；互动按固定路径重放；五张章节插画用已核对的 GPT 渠道生成，再解码、压缩并放到本篇目录。最后检查每个按钮、图片引用、字体和移动端布局。每一层都留下自己的记录，才有依据写“可以交付”。</p>
+    <p class="evidence-link">本篇取证与复跑：<a href="research/technical-evidence.md">源码与官方资料核对</a> · <a href="research/visual-brief.md">五张插画分镜</a> · <a href="research/mcp-observation.json">本机 MCP 握手与工具清单记录</a> · <a href="research/image-generation.json">本篇真实生成记录</a>。</p>
+  </div>
+</section>
+
+<section class="ending" id="quickcard" aria-labelledby="quickcard-title">
+  <h2 id="quickcard-title">如果只带走五句</h2>
+  <div class="quickcard"><p class="diagram-label">WORKBENCH CARD / 工作台速查</p><ol><li>Skill 保存做法、脚本与材料；是否用于本轮任务，要看实际加载与执行。</li><li>MCP 统一发现与调用的接口；CLI 与 HTTP 脚本也可以完成接入。</li><li>当前工具清单与 schema 是调用依据；文中旧名字和默认值要重新核对。</li><li>超时后保存任务编号，先查询已有工作；受理、完成与交付分别验。</li><li>检查文件，再看画面，再看页面；每一步都留下能复核的结果。</li></ol></div>
+  <div class="reading"><p>昨天，Linger 把许多能力收进一个命令行；今天，我把画境的两条入口放回同一张工作台。它们各自的价值因此变得具体：重复的做法可以写成技能，多种宿主需要共同接口时可以接 MCP，已有清楚的 CLI 时也可以直接用它。</p><p>要决定下一步接什么，先看这次工作卡在哪儿。流程散，就整理流程；接口散，就整理接口；结果拿回来了却无法交付，就把验收补上。桌上少一条电缆、多一份规程，都得说清它解决的是哪件事。</p></div>
+  <p class="source-note">资料核对于 2026-11-24：<a href="https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx">Agent Skills 格式与渐进加载</a>；MCP 2025-06-18 的<a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2025-06-18/basic/lifecycle.mdx">生命周期</a>、<a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2025-06-18/server/tools.mdx">工具规范</a>与<a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/docs/2025-06-18/learn/architecture.mdx">宿主／客户端／服务端结构</a>；本机画境源码路径与行号见取证页。Linger 的 155 条命令沿用上期取证，并未在本篇复现其产品。</p>
+</section>
+<nav class="series-nav" aria-label="系列导航"><a href="https://starrysea1412.github.io/vol23-linger/">← VOL.23 别人家的造物：Linger</a><a class="hub" href="https://starrysea1412.github.io/makers-notebook/">☰ 全系列目录</a><a href="#contents">回到本篇目录 ↑</a></nav>
+<footer class="site-foot"><div><b>STARRYSEA · 造物手记 VOL.24 · 把流程接上工具</b><p>5 章 · 5 段互动 · 5 张 GPT 插画 · 2 张机制图 · 2026.11</p></div><div class="foot-meta">流程 · 接入 · 完成证据<br><a href="https://github.com/StarrySea1412/vol24-skill-mcp">正文源码</a> · 页面零远程运行库依赖</div></footer>
+</div>
+</main>
+</body>
+</html>

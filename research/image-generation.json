@@ -1,0 +1,213 @@
+{
+  "article": "把流程接上工具",
+  "date": "2026-11-24",
+  "method": "User-selected Huajing HTTP API: POST /api/generations, then GET /api/generations/{id}",
+  "apiBase": "http://127.0.0.1:4173",
+  "style": "Use case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+  "requestedSize": "1536x1024",
+  "countPerSubmission": 1,
+  "polishPrompt": false,
+  "finalEncoding": {
+    "format": "webp",
+    "quality": 82,
+    "maxLongEdge": 1536,
+    "fit": "inside",
+    "cropping": false
+  },
+  "maxActiveJobs": 2,
+  "maxAttemptsPerImage": 3,
+  "assets": [
+    {
+      "slug": "01-paths",
+      "title": "三种入口",
+      "prompt": "Primary request: A top-down view of one small illustration studio desk. An unfinished botanical drawing lies at the center. Three distinct practical ways of reaching the same task sit around it: a terminal-like mechanical keypad, an open step-by-step notebook with simple pictograms, and a neat modular cable connector next to the notebook. Three separate thin colored cords reach the same drawing holder, clearly distinct and never tangled. The notebook does not depend physically on the connector; each route remains visibly separate. The image should communicate multiple ways to carry out the same work, not a hierarchy of intelligence. No readable text anywhere.\n\nUse case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+      "status": "completed",
+      "attempts": [
+        {
+          "number": 1,
+          "providerId": "2eb4cff3-6ded-4d22-8ae9-2258e32c3672",
+          "providerName": "噜皮生图",
+          "model": "gpt-image-2.5-sunburst",
+          "requestedSize": "1536x1024",
+          "submittedAt": "2026-11-24T15:20:52.002Z",
+          "status": "completed",
+          "jobId": "c90a3792-9d16-44c3-a905-5d4fdcfbb1e9",
+          "completedAt": "2026-11-24T15:21:56.654Z"
+        }
+      ],
+      "selectedAttempt": 1,
+      "original": {
+        "path": "D:\\project\\agent-skill-mcp\\research\\image-originals\\01-paths-attempt-1-c90a3792-9d16-44c3-a905-5d4fdcfbb1e9.png",
+        "sourceFile": "D:\\project\\ai-image-studio\\data\\generated\\4f832e01-4761-4ba1-a169-fcb1b5518906.png",
+        "format": "png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 3060101
+      },
+      "final": {
+        "path": "D:\\project\\agent-skill-mcp\\assets\\01-paths.webp",
+        "format": "webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 262184,
+        "quality": 82,
+        "cropping": false
+      },
+      "completedAt": "2026-11-24T15:22:12.304Z"
+    },
+    {
+      "slug": "02-progressive",
+      "title": "按需打开",
+      "prompt": "Primary request: Close view of a paper index card standing in front of an instruction notebook. The notebook is partly open, revealing a few illustrated process pages. Behind it, a reference folder and one compact practical tool are still on a shelf. Show a deliberate sequence from a tiny index card to the notebook, then to only one selected reference sheet; the remaining sheets stay closed. The composition should convey reading only what is needed rather than dumping all papers onto the desk. Use only simple pictograms where marks are needed; no readable text or numbers.\n\nUse case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+      "status": "completed",
+      "attempts": [
+        {
+          "number": 1,
+          "providerId": "2eb4cff3-6ded-4d22-8ae9-2258e32c3672",
+          "providerName": "噜皮生图",
+          "model": "gpt-image-2.5-sunburst",
+          "requestedSize": "1536x1024",
+          "submittedAt": "2026-11-24T15:20:52.002Z",
+          "status": "completed",
+          "jobId": "0a4051f9-3707-4686-9219-2379918f8ed8",
+          "completedAt": "2026-11-24T15:21:48.121Z"
+        }
+      ],
+      "selectedAttempt": 1,
+      "original": {
+        "path": "D:\\project\\agent-skill-mcp\\research\\image-originals\\02-progressive-attempt-1-0a4051f9-3707-4686-9219-2379918f8ed8.png",
+        "sourceFile": "D:\\project\\ai-image-studio\\data\\generated\\fb072a51-9946-4a54-9141-ac1b39d674af.png",
+        "format": "png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2609642
+      },
+      "final": {
+        "path": "D:\\project\\agent-skill-mcp\\assets\\02-progressive.webp",
+        "format": "webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 153170,
+        "quality": 82,
+        "cropping": false
+      },
+      "completedAt": "2026-11-24T15:21:52.286Z"
+    },
+    {
+      "slug": "03-contract",
+      "title": "参数契约",
+      "prompt": "Primary request: A careful close-up of two modular connector pieces on a cream paper workbench. One has three precisely shaped recesses; a matching plug aligns cleanly with them. Beside it, a mismatched extra-large plug rests visibly aside and does not fit. A small drawing request card and a plain mechanical inspection gauge are nearby. This is an understated engineering editorial illustration about a declared interface and invalid arguments. No human hands are needed. No readable text, no lettering.\n\nUse case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+      "status": "completed",
+      "attempts": [
+        {
+          "number": 1,
+          "providerId": "2eb4cff3-6ded-4d22-8ae9-2258e32c3672",
+          "providerName": "噜皮生图",
+          "model": "gpt-image-2.5-sunburst",
+          "requestedSize": "1536x1024",
+          "submittedAt": "2026-11-24T15:21:52.287Z",
+          "status": "completed",
+          "jobId": "cc37a149-1e57-4f87-9d89-61ecb7481f19",
+          "completedAt": "2026-11-24T15:22:50.291Z"
+        }
+      ],
+      "selectedAttempt": 1,
+      "original": {
+        "path": "D:\\project\\agent-skill-mcp\\research\\image-originals\\03-contract-attempt-1-cc37a149-1e57-4f87-9d89-61ecb7481f19.png",
+        "sourceFile": "D:\\project\\ai-image-studio\\data\\generated\\cc4e70b2-e289-4fef-a7c2-a5866903fca1.png",
+        "format": "png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2863071
+      },
+      "final": {
+        "path": "D:\\project\\agent-skill-mcp\\assets\\03-contract.webp",
+        "format": "webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 203588,
+        "quality": 82,
+        "cropping": false
+      },
+      "completedAt": "2026-11-24T15:22:52.523Z"
+    },
+    {
+      "slug": "04-ticket",
+      "title": "同一张任务票",
+      "prompt": "Primary request: A studio print rack with one blank cream task ticket clipped to a wire leading through three modest workstations: an incoming tray, a drawing machine at work, and a finished botanical illustration drying rack. A small desk clock in the foreground has stopped, while the machine behind it is visibly continuing its work. One continuous ticket route, exactly one task ticket, no duplicated ticket. Communicate that a watcher timing out does not mean the work stopped. No readable text or numbers on the ticket or clock.\n\nUse case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+      "status": "completed",
+      "attempts": [
+        {
+          "number": 1,
+          "providerId": "2eb4cff3-6ded-4d22-8ae9-2258e32c3672",
+          "providerName": "噜皮生图",
+          "model": "gpt-image-2.5-sunburst",
+          "requestedSize": "1536x1024",
+          "submittedAt": "2026-11-24T15:22:12.305Z",
+          "status": "completed",
+          "jobId": "550e3ab8-e4d8-4507-aeb7-786a36d44725",
+          "completedAt": "2026-11-24T15:23:10.252Z"
+        }
+      ],
+      "selectedAttempt": 1,
+      "original": {
+        "path": "D:\\project\\agent-skill-mcp\\research\\image-originals\\04-ticket-attempt-1-550e3ab8-e4d8-4507-aeb7-786a36d44725.png",
+        "sourceFile": "D:\\project\\ai-image-studio\\data\\generated\\54539591-62fe-44bd-99bb-36e8c057a313.png",
+        "format": "png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 3013033
+      },
+      "final": {
+        "path": "D:\\project\\agent-skill-mcp\\assets\\04-ticket.webp",
+        "format": "webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 263370,
+        "quality": 82,
+        "cropping": false
+      },
+      "completedAt": "2026-11-24T15:23:12.541Z"
+    },
+    {
+      "slug": "05-inspect",
+      "title": "打开再交付",
+      "prompt": "Primary request: A finished botanical illustration on a small studio light table, checked with a ruler and a clean magnifying glass. A sealed blank envelope and an empty frame sit aside, showing that receiving a container alone is not enough; the actual picture is laid out and inspected. The image should emphasize a useful readable picture with deliberate framing, calm precise workmanship and a final check of dimensions. The ruler may have simple tick marks but no numerals. No readable text, no logos, no watermark.\n\nUse case: illustration-story. Asset type: editorial illustration for an interactive Chinese engineering article.\nStyle/medium: refined hand-drawn ink lines and delicate muted watercolor washes on warm off-white paper (#f7f4ec), with precise navy (#2c4a7c) and charcoal ink (#23282a), sparse restrained amber (#a95f16), fine subtle paper grain. Calm, carefully observed practical objects, understated engineering field-notes aesthetic, soft natural studio light. This is the same small botanical illustration studio across five companion images.\nComposition/framing: landscape 3:2; give each object enough space; keep all main objects within the central 80 percent and keep complete objects visible. Polished but quiet editorial composition, believable materials and consistent perspective.\nConstraints: conceptual editorial artwork, not a screenshot or a measured experiment. No text, no lettering, no numbers, no logos, no watermark. No glossy 3D, no generic glowing AI brain, no mystical effects. Do not invent extra narrative objects or people.",
+      "status": "completed",
+      "attempts": [
+        {
+          "number": 1,
+          "providerId": "2eb4cff3-6ded-4d22-8ae9-2258e32c3672",
+          "providerName": "噜皮生图",
+          "model": "gpt-image-2.5-sunburst",
+          "requestedSize": "1536x1024",
+          "submittedAt": "2026-11-24T15:22:52.524Z",
+          "status": "completed",
+          "jobId": "27425d0e-0c23-4e8f-99e3-624c1f8dcf48",
+          "completedAt": "2026-11-24T15:23:36.238Z"
+        }
+      ],
+      "selectedAttempt": 1,
+      "original": {
+        "path": "D:\\project\\agent-skill-mcp\\research\\image-originals\\05-inspect-attempt-1-27425d0e-0c23-4e8f-99e3-624c1f8dcf48.png",
+        "sourceFile": "D:\\project\\ai-image-studio\\data\\generated\\50ab153e-cdd1-496a-899b-05e7723cd828.png",
+        "format": "png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2705423
+      },
+      "final": {
+        "path": "D:\\project\\agent-skill-mcp\\assets\\05-inspect.webp",
+        "format": "webp",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 176058,
+        "quality": 82,
+        "cropping": false
+      },
+      "completedAt": "2026-11-24T15:23:52.755Z"
+    }
+  ],
+  "serviceVersion": "0.2.0",
+  "updatedAt": "2026-11-24T15:23:52.756Z"
+}

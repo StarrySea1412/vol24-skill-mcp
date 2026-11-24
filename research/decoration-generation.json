@@ -1,0 +1,39 @@
+{
+  "createdAt": "2026-11-24T15:24:17.536727+00:00",
+  "source": "D:\\project\\agent-skill-mcp\\assets\\01-paths.webp",
+  "sourceSha256": "b0dbd88782c44255b9b3c192e8d64aeee61ca0a980d5f1390f9e743e79f2e081",
+  "sourceWidth": 1536,
+  "sourceHeight": 1024,
+  "destination": "D:\\project\\agent-skill-mcp\\assets\\loop.gif",
+  "format": "GIF",
+  "signature": "GIF89a",
+  "actualFrames": 12,
+  "width": 384,
+  "height": 256,
+  "frameDurationsMs": [
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150
+  ],
+  "loopDurationMs": 1800,
+  "loop": 0,
+  "bytes": 719773,
+  "method": "12-frame cosine push-in on a single GPT-generated still illustration",
+  "zoomRange": [
+    1.0,
+    1.025
+  ],
+  "paletteColors": 64,
+  "description": "Decorative loop only; it does not demonstrate actual task execution or protocol state.",
+  "caption": "装饰循环：由本篇 GPT 插画合成的 12 帧轻推镜，不表示真实任务状态。",
+  "verification": "Pillow decoded all 12 frames; GIF signature, canvas, infinite loop and durations verified."
+}

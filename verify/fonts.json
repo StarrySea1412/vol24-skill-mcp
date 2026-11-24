@@ -1,0 +1,15 @@
+{
+  "characters": 767,
+  "fonts": [
+    {
+      "file": "wenkai-regular.woff2",
+      "bytes": 166824,
+      "missingChineseGlyphs": []
+    },
+    {
+      "file": "wenkai-medium.woff2",
+      "bytes": 165380,
+      "missingChineseGlyphs": []
+    }
+  ]
+}

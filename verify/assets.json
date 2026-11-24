@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "assets": [
+    {
+      "file": "01-paths.webp",
+      "format": "WEBP",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 262184,
+      "sha256": "b0dbd88782c44255b9b3c192e8d64aeee61ca0a980d5f1390f9e743e79f2e081"
+    },
+    {
+      "file": "02-progressive.webp",
+      "format": "WEBP",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 153170,
+      "sha256": "64cb3db24ecf16b7d168d81e8756470a0cb5176a47919da6c555ad10b7b05411"
+    },
+    {
+      "file": "03-contract.webp",
+      "format": "WEBP",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 203588,
+      "sha256": "5b9325c9eba705619f66c6d43c9bba47d7a51eb77d0df9bc17652215b6b7ff43"
+    },
+    {
+      "file": "04-ticket.webp",
+      "format": "WEBP",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 263370,
+      "sha256": "1d89354698741ec754f3ddbd18f65e9b49634586cb62294cc858a6529313914c"
+    },
+    {
+      "file": "05-inspect.webp",
+      "format": "WEBP",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 176058,
+      "sha256": "29be26b571ef015e83c58dc9dd2f1ef6380e31768ae618e5cba18208c4f2273a"
+    },
+    {
+      "file": "01-workflow.svg",
+      "format": "SVG",
+      "bytes": 3538,
+      "sha256": "cf66081fbb00d85a59476fd6e966281ff1dcb40c3c4af84ddc8d33c543e19ceb"
+    },
+    {
+      "file": "02-handshake.svg",
+      "format": "SVG",
+      "bytes": 1862,
+      "sha256": "11610e8eefca448625b86fbce76a57fa59cdf9babb9149ecd4af4bf6527dd9df"
+    },
+    {
+      "file": "loop.gif",
+      "format": "GIF",
+      "frames": 12,
+      "width": 384,
+      "height": 256,
+      "bytes": 719773
+    }
+  ]
+}

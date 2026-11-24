@@ -1,0 +1,102 @@
+{
+  "observedAtUtc": "2026-11-24T15:21:11.289Z",
+  "requestedProtocolVersion": "2025-06-18",
+  "initialization": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {
+      "tools": {
+        "listChanged": true
+      }
+    },
+    "serverInfo": {
+      "name": "ai-image-studio",
+      "version": "0.1.0"
+    },
+    "instructions": "这是本机“画境”AI 生图工作台的 MCP 接口。生成图片用 generate_image（默认等待完成并返回本机文件路径，可直接读取查看）；providerId 不确定时先调 list_providers；润色提示词用 polish_prompt；图库检索用 search_library；从图片反推提示词用 inspect_image（传本机图片绝对路径）；需要拍摄机位/站位分析（机位高度、俯仰角、光位、画面层次与关键构图关系）时用 inspect_image 并设 mode: \"position\"。视频耗时长，generate_video 只提交任务，用 get_video 轮询。动图（GIF）三步走：list_gif_styles 拿风格与提示词骨架 → generate_image 生成图集（姿势表/状态对/关键帧）→ assemble_gif 组装入库（不消耗模型配额）；图集组装前可先用 analyze_gif 核对切格与空格。"
+  },
+  "toolCount": 13,
+  "tools": [
+    {
+      "name": "generate_image",
+      "title": "生成图片",
+      "description": "提交生图任务并等待完成。返回任务状态、本机图片绝对路径（可直接读取文件查看）。真实渠道按张计费，请确认提示词后再调用。",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000,
+            "description": "画面描述（正向提示词）"
+          },
+          "providerId": {
+            "description": "渠道 ID；不传则自动选第一个启用了生图模型的渠道",
+            "type": "string"
+          },
+          "model": {
+            "description": "生图模型 ID；不传用渠道默认",
+            "type": "string"
+          },
+          "size": {
+            "description": "分辨率，auto 或 宽x高（256-2048 且为 64 的倍数），默认 1024x1024",
+            "type": "string"
+          },
+          "count": {
+            "description": "生成张数 1-4，默认 1",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          },
+          "negativePrompt": {
+            "description": "负面提示词",
+            "type": "string",
+            "maxLength": 4000
+          },
+          "wait": {
+            "default": true,
+            "description": "是否等待生成完成，默认 true",
+            "type": "boolean"
+          },
+          "waitSeconds": {
+            "description": "最长等待秒数，默认 240",
+            "type": "integer",
+            "minimum": 5,
+            "maximum": 600
+          }
+        },
+        "required": [
+          "prompt"
+        ]
+      }
+    },
+    {
+      "name": "get_generation",
+      "title": "查询生成任务",
+      "description": "按 ID 查询生图任务的状态、参数与成图路径。",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "任务 ID，来自 generate_image 的返回"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "operations": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list"
+  ],
+  "toolCalls": 0,
+  "generationCalls": 0,
+  "serverPath": "D:/project/ai-image-studio/src/mcp-server.js",
+  "serviceUrl": "http://127.0.0.1:4173",
+  "note": "Live read-only stdio observation. No tools/call, provider lookup, generation or service-data writes were requested."
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="440" viewBox="0 0 680 440" role="img" aria-labelledby="title desc">
+<title id="title">MCP会话的一条工具路径</title><desc id="desc">先initialize请求与响应，再不带id的initialized通知，之后tools/list发现工具，最后tools/call。图按2025-06-18版本说明。</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#2c4a7c" stroke-width="1.5"/></marker></defs>
+<rect width="680" height="440" fill="#fffcf4"/>
+<g font-family="Consolas, Microsoft YaHei, sans-serif"><text x="28" y="35" font-size="16" fill="#a95f16">MCP 2025-06-18 / 本篇固定口径</text>
+<rect x="26" y="55" width="174" height="51" rx="5" fill="#e4ebf2" stroke="#2c4a7c"/><text x="49" y="87" font-size="24" fill="#2c4a7c">客户端</text>
+<rect x="480" y="55" width="174" height="51" rx="5" fill="#f6e6d2" stroke="#a95f16"/><text x="502" y="87" font-size="24" fill="#a95f16">服务端</text>
+<g stroke="#c3c5c2" stroke-width="1.2" stroke-dasharray="5 6"><path d="M113 112v278"/><path d="M567 112v278"/></g>
+<g stroke="#2c4a7c" stroke-width="1.7" fill="none" marker-end="url(#a)"><path d="M118 157h445"/><path d="M562 210H118"/><path d="M118 263h445" stroke-dasharray="5 4"/><path d="M118 316h445"/><path d="M118 369h445"/></g>
+<g font-size="21" fill="#23282a"><text x="181" y="145">01 initialize · 请求带 id</text><text x="191" y="198">版本与能力 · 响应同 id</text><text x="175" y="251">02 initialized · 通知无 id</text><text x="202" y="304">03 tools/list · 工具清单</text><text x="186" y="357">04 tools/call · 名称与参数</text></g>
+<text x="29" y="421" font-size="16" fill="#6a7168">图中省略 tools/list 与 tools/call 的响应；通知不期待响应。</text></g></svg>

@@ -1,0 +1,6 @@
+shots/
+.preview.pid
+verify/local-results.json
+research/private-*
+research/.font-runtime/
+research/image-originals/
